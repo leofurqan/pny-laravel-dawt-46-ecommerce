@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('last_name')->after('first_name');
             $table->string('phone')->after('email');
         });
-    }
+    } 
 
     /**
      * Reverse the migrations.
