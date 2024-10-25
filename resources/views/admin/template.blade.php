@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('backend/vendors/perfect-scrollbar/perfect-scrollbar.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/vendors/bootstrap-icons/bootstrap-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('backend/vendors/simple-datatables/style.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('backend/vendors/simple-datatables/style.css') }}"> --}}
 
     <link rel="shortcut icon" href="{{ asset('backend/images/favicon.svg') }}" type="image/x-icon">
 </head>
@@ -51,6 +51,13 @@
                             <a href="{{ route('admin.categories.index') }}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Categories</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item ">
+                            <a href="{{ route('admin.products.index') }}" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Products</span>
                             </a>
                         </li>
                     </ul>
@@ -89,12 +96,12 @@
     <script src="{{ asset('backend/vendors/apexcharts/apexcharts.js') }}"></script>
     <script src="{{ asset('backend/js/pages/dashboard.js') }}"></script>
 
-    <script src="{{ asset('backend/vendors/simple-datatables/simple-datatables.js') }}"></script>
-    <script>
+    {{-- <script src="{{ asset('backend/vendors/simple-datatables/simple-datatables.js') }}"></script> --}}
+    {{-- <script>
         // Simple Datatable
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
-    </script>
+    </script> --}}
 
     <script src="{{ asset('backend/js/main.js') }}"></script>
 </body>
