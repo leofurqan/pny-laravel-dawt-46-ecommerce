@@ -30,7 +30,7 @@
                 <a class="btn btn-primary" href="{{ route('admin.categories.create') }}">Add Category</a>
             </div>
             <div class="card-body">
-                <table class="table table-striped">
+                <table class="table table-striped" id="datatable">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -62,7 +62,7 @@
                                     @csrf
                                     @method('delete')
                                     <button type="submit" onclick="confirm_delete()" class="btn btn-sm btn-danger icon" title="Delete">
-                                            <i class=" bi bi-trash-fill"></i>
+                                        <i class=" bi bi-trash-fill"></i>
                                     </button>
                                 </form>
                             </td>
@@ -78,9 +78,10 @@
 
 <script>
     function confirm_delete() {
-        if(!confirm("Are you sure you want to delete?")) {
+        if (!confirm("Are you sure you want to delete?")) {
             event.preventDefault();
         }
     }
 </script>
+
 @endsection

@@ -37,9 +37,18 @@ class ProductController extends Controller
             'price' => 'required|numeric',
             'quantity' => 'required|numeric',
             'description' => 'required',
+            'image' => 'required|image',
             'status' => 'required',
         ]);
 
+        $image = $request->image;
+
+        if ($image) {
+            $imageName = time() . '.' . $image->extension();
+            $image->move('uploads/products/', $imageName);
+            $product["image"] = $imageName;
+        }
+        
         Product::create($product);
 
         return redirect()->route('admin.products.index');
@@ -77,7 +86,8 @@ class ProductController extends Controller
         //
     }
 
-    public function printProducts() {
+    public function printProducts()
+    {
         $products = Product::all();
         return view('admin.products.print', compact('products'));
     }
