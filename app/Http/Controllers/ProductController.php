@@ -38,6 +38,7 @@ class ProductController extends Controller
             'quantity' => 'required|numeric',
             'description' => 'required',
             'image' => 'required|image',
+            'featured' => 'required',
             'status' => 'required',
         ]);
 

@@ -107,6 +107,23 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-12 col-md-8 offset-md-4 form-group">
+                                            <div class='form-radio'>
+                                                <div class="radio">
+                                                    <input type="radio" id="active" class='form-radio-input'
+                                                        name="featured" checked value="1">
+                                                    <label for="active">Featured</label>
+                                                </div>
+                                            </div>
+
+                                            <div class='form-radio'>
+                                                <div class="radio">
+                                                    <input type="radio" name="featured" id="inactive"
+                                                        class='form-radio-input' value="0">
+                                                    <label for="inactive">Not Featured</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-sm-12 d-flex justify-content-end">
                                             <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                             <button type="reset"

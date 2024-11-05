@@ -33,7 +33,7 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form class="form form-horizontal" method="post" action="{{route('admin.categories.store')}}">
+                                <form class="form form-horizontal" method="post" action="{{route('admin.categories.store')}}" enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-body">
                                         <div class="row">
@@ -43,6 +43,13 @@
                                             <div class="col-md-8 form-group">
                                                 <input type="text" id="first-name" class="form-control" name="name"
                                                     placeholder="Category Name">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Category Image</label>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+                                                <input type="file" id="image" class="form-control" name="image"
+                                                    placeholder="Category Image">
                                             </div>
                                             <div class="col-md-4">
                                                 <label>Description</label>

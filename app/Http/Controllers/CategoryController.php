@@ -32,8 +32,16 @@ class CategoryController extends Controller
         $data = $request->validate([
             'name' => 'required',
             'description' => 'required',
+            'image' => 'required|image',
             'status' => 'required|boolean'
         ]);
+
+        $image = $request->image;
+        if ($image) {
+            $imageName = time() . '.' . $image->extension();
+            $image->move('uploads/categories/', $imageName);
+            $data["image"] = $imageName;
+        }
 
         Category::create($data);
 
