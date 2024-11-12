@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Jackiedo\Cart\Facades\Cart;
 
 class WebsiteController extends Controller
 {
@@ -28,6 +29,29 @@ class WebsiteController extends Controller
 
     public function cart() {
         return view('website.cart');
+    }
+
+    public function addToCart(Request $request) {
+        $cart = Cart::name('shopping');
+        $product = Product::find($request->product_id);
+
+        $cart->addItem([
+            'id' => $product->id,
+            'title' => $product->name,
+            'price' => $product->price,
+            'quantity' => $request->quantity,
+            'extra_info' => [
+                'image' => $product->image
+            ]
+        ]);
+
+        return redirect()->route('website.index');
+    }
+
+    public function clearCart(){
+        $cart = Cart::name('shopping');
+        $cart->clearItems();
+        return redirect()->route('website.index');
     }
 
     public function checkout() {

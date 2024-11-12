@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\WebsiteController;
+use App\Http\Middleware\CartMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -22,11 +23,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
 Route::get('/products/print', [ProductController::class, 'printProducts'])->name('products.print');
 
 Route::name('website.')->group(function () {
-    Route::get('/', [WebsiteController::class, 'index'])->name('index');
-    Route::get('/shop', [WebsiteController::class, 'shop'])->name('shop');
-    Route::get('/about', [WebsiteController::class, 'about'])->name('about');
-    Route::get('/contact', [WebsiteController::class, 'contact'])->name('contact');
-    Route::get('/cart', [WebsiteController::class, 'cart'])->name('cart');
-    Route::get('/checkout', [WebsiteController::class, 'checkout'])->name('checkout');
-    Route::get('/blogs', [WebsiteController::class, 'blogs'])->name('blogs');
+    Route::middleware([CartMiddleware::class])->group(function () {
+        Route::get('/', [WebsiteController::class, 'index'])->name('index');
+        Route::get('/shop', [WebsiteController::class, 'shop'])->name('shop');
+        Route::get('/about', [WebsiteController::class, 'about'])->name('about');
+        Route::get('/contact', [WebsiteController::class, 'contact'])->name('contact');
+        Route::get('/cart', [WebsiteController::class, 'cart'])->name('cart');
+        Route::get('/clearCart', [WebsiteController::class, 'clearCart'])->name('clearCart');
+        Route::post('/addToCart', [WebsiteController::class, 'addToCart'])->name('addToCart');
+        Route::get('/checkout', [WebsiteController::class, 'checkout'])->name('checkout');
+        Route::get('/blogs', [WebsiteController::class, 'blogs'])->name('blogs');
+    });
 });
