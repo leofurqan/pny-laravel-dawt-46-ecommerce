@@ -122,7 +122,7 @@
                         </div>
 
                         <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 icon-header-noti js-show-cart"
-                            data-notify="2">
+                            data-notify="{{$cart_count}}">
                             <i class="zmdi zmdi-shopping-cart"></i>
                         </div>
 
@@ -269,28 +269,28 @@
             <div class="header-cart-content flex-w js-pscroll">
                 <ul class="header-cart-wrapitem w-full">
                     @foreach ($items as $hash => $item)
-                        <li class="header-cart-item flex-w flex-t m-b-12">
-                            <div class="header-cart-item-img">
-                                <img src="{{ asset('uploads/products/' . $item->getExtraInfo('image')) }}"
-                                    alt="IMG">
-                            </div>
+                    <li class="header-cart-item flex-w flex-t m-b-12">
+                        <div class="header-cart-item-img">
+                            <img src="{{ asset('uploads/products/' . $item->getExtraInfo('image')) }}"
+                                alt="IMG">
+                        </div>
 
-                            <div class="header-cart-item-txt p-t-8">
-                                <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-                                    {{ $item->getTitle() }}
-                                </a>
+                        <div class="header-cart-item-txt p-t-8">
+                            <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+                                {{ $item->getTitle() }}
+                            </a>
 
-                                <span class="header-cart-item-info">
-                                    {{ $item->getQuantity() }} x {{ $item->getPrice() }}
-                                </span>
-                            </div>
-                        </li>
+                            <span class="header-cart-item-info">
+                                {{ $item->getQuantity() }} x {{ $item->getPrice() }}
+                            </span>
+                        </div>
+                    </li>
                     @endforeach
                 </ul>
 
                 <div class="w-full">
                     <div class="header-cart-total w-full p-tb-40">
-                        Total: $75.00
+                        Total: Rs. {{$cart_total}}
                     </div>
 
                     <div class="header-cart-buttons flex-w w-full">

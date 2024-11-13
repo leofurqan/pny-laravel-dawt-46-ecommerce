@@ -33,7 +33,7 @@
                         </div>
                         <div class="card-content">
                             <div class="card-body">
-                                <form class="form form-horizontal" method="post" action="{{route('admin.categories.update', $category->id)}}">
+                                <form class="form form-horizontal" method="post" action="{{route('admin.categories.update', $category->id)}}" enctype="multipart/form-data">
                                     @csrf
                                     @method('put')
                                     <div class="form-body">
@@ -44,6 +44,13 @@
                                             <div class="col-md-8 form-group">
                                                 <input type="text" id="first-name" class="form-control" name="name"
                                                     placeholder="Category Name" value="{{$category->name}}">
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Category Image</label>
+                                            </div>
+                                            <div class="col-md-8 form-group">
+                                                <input type="file" id="image" class="form-control" name="image"
+                                                    placeholder="Category Image">
                                             </div>
                                             <div class="col-md-4">
                                                 <label>Description</label>

@@ -75,6 +75,13 @@ class CategoryController extends Controller
             'status' => 'required|boolean'
         ]);
 
+        $image = $request->image;
+        if ($image) {
+            $imageName = time() . '.' . $image->extension();
+            $image->move('uploads/categories/', $imageName);
+            $category->image = $imageName;
+        }
+
         $category->name = $request->name;
         $category->description = $request->description;
         $category->status = $request->status;

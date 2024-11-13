@@ -26,12 +26,13 @@ Route::name('website.')->group(function () {
     Route::middleware([CartMiddleware::class])->group(function () {
         Route::get('/', [WebsiteController::class, 'index'])->name('index');
         Route::get('/shop', [WebsiteController::class, 'shop'])->name('shop');
+        Route::get('/shop/category/{id}', [WebsiteController::class, 'shopCategory'])->name('shopCategory');
         Route::get('/about', [WebsiteController::class, 'about'])->name('about');
         Route::get('/contact', [WebsiteController::class, 'contact'])->name('contact');
         Route::get('/cart', [WebsiteController::class, 'cart'])->name('cart');
         Route::get('/clearCart', [WebsiteController::class, 'clearCart'])->name('clearCart');
         Route::post('/addToCart', [WebsiteController::class, 'addToCart'])->name('addToCart');
-        Route::get('/checkout', [WebsiteController::class, 'checkout'])->name('checkout');
+        Route::post('/placeOrder', [WebsiteController::class, 'placeOrder'])->name('placeOrder');
         Route::get('/blogs', [WebsiteController::class, 'blogs'])->name('blogs');
     });
 });

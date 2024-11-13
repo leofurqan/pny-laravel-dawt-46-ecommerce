@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Jackiedo\Cart\Facades\Cart;
@@ -16,7 +18,13 @@ class WebsiteController extends Controller
     }
 
     public function shop() {
-        return view('website.shop');
+        $products = Product::all();
+        return view('website.shop', compact('products'));
+    }
+
+    public function shopCategory($id) {
+        $products = Product::where('category_id', $id)->get();
+        return view('website.shop', compact('products'));
     }
 
     public function contact() {
@@ -54,7 +62,38 @@ class WebsiteController extends Controller
         return redirect()->route('website.index');
     }
 
-    public function checkout() {
-        return view('website.checkout');
+    public function placeOrder(Request $request) {
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+            'address' => 'required',
+            'zip' => 'required',
+            'city' => 'required'
+        ]);
+
+        $cart = Cart::name('shopping');
+        $items = $cart->getItems();
+        $data["total"] = $cart->getItemsSubtotal();
+
+        $order = Order::create($data);
+
+        foreach($items as $hash => $item) {
+            $orderItem = array(
+                'order_id' => $order->id,
+                'product_id' => $item->getId(),
+                'price' => $item->getPrice(),
+                'quantity' => $item->getQuantity(),
+                'subtotal' => $item->getPrice() * $item->getQuantity()
+            );
+
+            OrderItem::create($orderItem);
+        }
+        $cart->clearItems();
+        flash()->options([
+            'position' => 'bottom-right',
+        ])->success('Your order has been placed successfully...');
+
+        return redirect()->route('website.index');
     }
 }

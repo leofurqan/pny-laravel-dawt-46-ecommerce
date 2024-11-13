@@ -20,7 +20,11 @@ class CartMiddleware
     {
         $cart = Cart::name('shopping');
         $items = $cart->getItems();
+        $cart_count = $cart->countItems();
+        $cart_total = $cart->getItemsSubtotal();
         View::share('items', $items);
+        View::share('cart_count', $cart_count);
+        View::share('cart_total', $cart_total);
         return $next($request);
     }
 }
